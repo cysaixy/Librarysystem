@@ -9,9 +9,7 @@
         End Set
     End Property
 
-    '────────────────────────────────────────────────────────────
-    ' KEY TRAPPING — letters and spaces only for classification
-    '────────────────────────────────────────────────────────────
+    
     Private Sub txtClassification_KeyPress(sender As Object,
         e As KeyPressEventArgs) Handles txtClassification.KeyPress
         Dim allowed As String =
