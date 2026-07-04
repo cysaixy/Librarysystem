@@ -9,9 +9,7 @@
         End Set
     End Property
 
-    '────────────────────────────────────────────────────────────
-    ' FORM LOAD
-    '────────────────────────────────────────────────────────────
+   
     Private Sub AEBooks_Load(sender As Object,
         e As EventArgs) Handles MyBase.Load
         Connect.PopulateComboBox(
@@ -22,9 +20,7 @@
             "SELECT ID, PubName FROM Publishers", cboPub)
     End Sub
 
-    '────────────────────────────────────────────────────────────
-    ' KEY TRAPPING — copyright: digits only
-    '────────────────────────────────────────────────────────────
+    
     Private Sub txtCopyright_KeyPress(sender As Object,
         e As KeyPressEventArgs) Handles txtCopyright.KeyPress
         Dim allowed As String = "1234567890"
@@ -34,10 +30,7 @@
         If Asc(e.KeyChar) = 8 Then e.Handled = False
     End Sub
 
-    '────────────────────────────────────────────────────────────
-    ' SAVE BUTTON
-    ' NOTE: INSERT and UPDATE use [Books.] with square brackets
-    '────────────────────────────────────────────────────────────
+    
     Private Sub btnSave_Click(sender As Object,
         e As EventArgs)
 
@@ -50,7 +43,7 @@
             Exit Sub
         End If
 
-        ' Get IDs from selected combo text
+        
         Dim classID As Integer =
             Connect.SQLPull(
                 "SELECT ID FROM Classification WHERE " &
@@ -92,9 +85,7 @@
         Me.Dispose()
     End Sub
 
-    '────────────────────────────────────────────────────────────
-    ' CANCEL BUTTON
-    '────────────────────────────────────────────────────────────
+   
 
 
     Private Sub btnCancel_Click_1(sender As Object, e As EventArgs) Handles btnCancel.Click
