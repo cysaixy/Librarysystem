@@ -12,9 +12,7 @@ Public Class MainForm
         LoadRecordCounts()
     End Sub
 
-    '────────────────────────────────────────────────────────────
-    ' STYLING — MenuStrip
-    '────────────────────────────────────────────────────────────
+   
     Private Sub ApplyMenuStyle()
         MenuStrip1.BackColor = Color.FromArgb(26, 26, 46)
         MenuStrip1.ForeColor = Color.White
@@ -32,9 +30,7 @@ Public Class MainForm
         mnuLogout.Font = New Font("Segoe UI", 9.5, FontStyle.Bold)
     End Sub
 
-    '────────────────────────────────────────────────────────────
-    ' STYLING — Header Panel
-    '────────────────────────────────────────────────────────────
+    
     Private Sub ApplyHeaderStyle()
 
 
@@ -46,9 +42,7 @@ Public Class MainForm
 
     End Sub
 
-    '────────────────────────────────────────────────────────────
-    ' STYLING — StatusStrip
-    '────────────────────────────────────────────────────────────
+    
     Private Sub ApplyStatusStyle()
         statusstrip.BackColor = Color.FromArgb(26, 26, 46)
         statusstrip.SizingGrip = False
@@ -58,9 +52,7 @@ Public Class MainForm
         lblStatus.TextAlign = ContentAlignment.MiddleLeft
     End Sub
 
-    '────────────────────────────────────────────────────────────
-    ' STYLING — MDI Background
-    '────────────────────────────────────────────────────────────
+    
     Private Sub SetMdiBackground()
         For Each ctrl As Control In Me.Controls
             If ctrl.GetType().Name = "MdiClient" Then
@@ -69,20 +61,17 @@ Public Class MainForm
         Next
     End Sub
 
-    '────────────────────────────────────────────────────────────
-    ' RECORD COUNTS
-    ' NOTE: [Books.] uses square brackets because of the dot
-    '────────────────────────────────────────────────────────────
+     
     Public Sub LoadRecordCounts()
         Try
             Dim sb As New System.Text.StringBuilder("  Records — ")
 
-            ' Books. needs square brackets in SQL
+             
             Dim dtBooks As DataTable =
                 Connect.SQLPull("SELECT COUNT(*) AS Total FROM vBook")
             sb.Append("Books: " & dtBooks.Rows(0)(0).ToString() & "   ")
 
-            ' Other tables — no brackets needed
+             
             Dim others() = {"Authors", "Publishers",
                             "Classification", "Patrons", "Programs"}
             For Each t In others
@@ -97,9 +86,7 @@ Public Class MainForm
         End Try
     End Sub
 
-    '────────────────────────────────────────────────────────────
-    ' OPEN RECORD LIST HELPER
-    '────────────────────────────────────────────────────────────
+    
     Private Sub OpenRecordList(title As String,
                                menuItem As ToolStripMenuItem)
         Dim frm As New RecordList
@@ -110,13 +97,10 @@ Public Class MainForm
         frm.Show()
     End Sub
 
-    '────────────────────────────────────────────────────────────
-    ' MENU CLICK HANDLERS
-    ' NOTE: Books uses "Books." to match the table name
-    '────────────────────────────────────────────────────────────
+     
     Private Sub mnuBooks_Click(sender As Object,
         e As EventArgs) Handles mnuBooks.Click
-        OpenRecordList("Books.", mnuBooks)   ' <-- "Books." with dot
+        OpenRecordList("Books.", mnuBooks)    
     End Sub
 
     Private Sub mnuAuthors_Click(sender As Object,
@@ -144,9 +128,7 @@ Public Class MainForm
         OpenRecordList("Programs", mnuPrograms)
     End Sub
 
-    '────────────────────────────────────────────────────────────
-    ' LOGOUT
-    '────────────────────────────────────────────────────────────
+   
     Private Sub mnuLogout_Click(sender As Object,
         e As EventArgs) Handles mnuLogout.Click
         If MsgBox("Do you really want to log-out?",
