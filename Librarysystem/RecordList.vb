@@ -1,25 +1,18 @@
 ﻿Public Class RecordList
-    '────────────────────────────────────────────────────────────
-    ' FORM LOAD
-    '────────────────────────────────────────────────────────────
+    
     Private Sub RecordList_Load(sender As Object,
         e As EventArgs) Handles MyBase.Load
         ApplyStyle()
         txtTitle.Text = Me.Text
     End Sub
 
-    '────────────────────────────────────────────────────────────
-    ' ACTIVATED
-    '────────────────────────────────────────────────────────────
+     
     Private Sub RecordList_Activated(sender As Object,
         e As EventArgs) Handles Me.Activated
         ReloadRecords()
     End Sub
 
-    '────────────────────────────────────────────────────────────
-    ' RELOAD RECORDS
-    ' NOTE: Books. → uses vBook (your view name)
-    '────────────────────────────────────────────────────────────
+     
     Sub ReloadRecords()
         Select Case Trim(Me.Text)
             Case "Books."
@@ -46,17 +39,15 @@
         Count.Text = dgv.Rows.Count & " records"
     End Sub
 
-    '────────────────────────────────────────────────────────────
-    ' FORMAT GRID
-    '────────────────────────────────────────────────────────────
+     
     Sub FormatGrid()
         Select Case Trim(Me.Text)
 
             Case "Books."
-                dgv.Columns(0).Visible = False   ' ID
-                dgv.Columns(7).Visible = False   ' ClassID
-                dgv.Columns(8).Visible = False   ' AuthorID
-                dgv.Columns(9).Visible = False   ' PublisherID
+                dgv.Columns(0).Visible = False    
+                dgv.Columns(7).Visible = False    
+                dgv.Columns(8).Visible = False   
+                dgv.Columns(9).Visible = False    
                 dgv.Columns(1).Width = 140 : dgv.Columns(1).HeaderText = "ISBN"
                 dgv.Columns(2).Width = 180 : dgv.Columns(2).HeaderText = "Book Title"
                 dgv.Columns(3).Width = 140 : dgv.Columns(3).HeaderText = "Class "
@@ -82,7 +73,7 @@
 
             Case "Patrons"
                 dgv.Columns(0).Visible = False
-                dgv.Columns(4).Visible = False   ' ProgramID FK
+                dgv.Columns(4).Visible = False    
                 dgv.Columns(1).Width = 130 : dgv.Columns(1).HeaderText = "Last Name"
                 dgv.Columns(2).Width = 120 : dgv.Columns(2).HeaderText = "First Name"
                 dgv.Columns(3).Width = 130 : dgv.Columns(3).HeaderText = "Middle Name"
@@ -98,9 +89,7 @@
         End Select
     End Sub
 
-    '────────────────────────────────────────────────────────────
-    ' ADD RECORD
-    '────────────────────────────────────────────────────────────
+    
     Sub AddRecord()
         Select Case Trim(Me.Text)
             Case "Books."
@@ -129,9 +118,7 @@
         AddRecord()
     End Sub
 
-    '────────────────────────────────────────────────────────────
-    ' EDIT RECORD
-    '────────────────────────────────────────────────────────────
+   
     Sub EditRecord()
         If dgv.CurrentRow Is Nothing Then
             MsgBox("Please select a record to edit.",
@@ -197,10 +184,7 @@
         EditRecord()
     End Sub
 
-    '────────────────────────────────────────────────────────────
-    ' DELETE RECORD
-    ' NOTE: [Books.] — square brackets required for dot in name
-    '────────────────────────────────────────────────────────────
+   
     Sub DeleteRecord()
         If dgv.CurrentRow Is Nothing Then
             MsgBox("Please select a record to delete.",
@@ -245,9 +229,7 @@
         DeleteRecord()
     End Sub
 
-    '────────────────────────────────────────────────────────────
-    ' SEARCH
-    '────────────────────────────────────────────────────────────
+    
     Private Sub btnSearch_Click(sender As Object,
         e As EventArgs) Handles btnSearch.Click
         grp.Visible = True
@@ -300,18 +282,14 @@
         End Select
     End Sub
 
-    '────────────────────────────────────────────────────────────
-    ' RELOAD BUTTON
-    '────────────────────────────────────────────────────────────
+   
     Private Sub btnReload_Click(sender As Object,
         e As EventArgs) Handles btnReload.Click
         txtSearch.Clear()
         ReloadRecords()
     End Sub
 
-    '────────────────────────────────────────────────────────────
-    ' CLOSE FORM
-    '────────────────────────────────────────────────────────────
+ 
     Sub CloseForm()
         Select Case Trim(Me.Text)
             Case "Books."
@@ -336,9 +314,7 @@
         CloseForm()
     End Sub
 
-    '────────────────────────────────────────────────────────────
-    ' STYLING
-    '────────────────────────────────────────────────────────────
+    
     Private Sub ApplyStyle()
         pnlHeader.BackColor = Color.FromArgb(26, 26, 46)
 
