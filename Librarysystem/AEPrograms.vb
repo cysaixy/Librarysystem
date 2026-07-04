@@ -11,7 +11,7 @@
         End Set
     End Property
 
-    '── KEY TRAPPING — letters and digits only for code ─────────
+   
     Private Sub txtProgramCode_KeyPress(sender As Object,
         e As KeyPressEventArgs) Handles txtProgramCode.KeyPress
         Dim allowed As String =
