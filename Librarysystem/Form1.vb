@@ -2,42 +2,30 @@
 Imports System.Data.SqlClient
 
 Public Class Form1
-    '══════════════════════════════════════════════════════════
-    ' CONSTANTS & STATE
-    '══════════════════════════════════════════════════════════
+   
     Private Const MAX_ATTEMPTS As Integer = 3
     Private Const LOCK_SECONDS As Integer = 60
 
     Private _attempts As Integer = 0
     Private _lockCountdown As Integer = 0
 
-    '══════════════════════════════════════════════════════════
-    ' FORM LOAD
-    '══════════════════════════════════════════════════════════
+   
     Private Sub frmLogin_Load(sender As Object, e As EventArgs) _
         Handles MyBase.Load
         ResetUI()
         txtUsername.Focus()
     End Sub
 
-    '══════════════════════════════════════════════════════════
-    ' KEY TRAPPING
-    '══════════════════════════════════════════════════════════
-
-    ''' <summary>
-    ''' Username: allow letters, digits, underscore only.
-    ''' Enter moves focus to password field.
-    ''' </summary>
+   
     Private Sub txtUsername_KeyPress(sender As Object,
         e As KeyPressEventArgs) Handles txtUsername.KeyPress
 
         Select Case e.KeyChar
-            Case Chr(13)    ' Enter → jump to password
+            Case Chr(13)   
                 txtPassword.Focus()
                 e.Handled = True
 
-            Case Chr(8)     ' Backspace — always allow
-                ' let it through
+            Case Chr(8)     
 
             Case Else
                 If Not (Char.IsLetterOrDigit(e.KeyChar) OrElse
@@ -47,9 +35,7 @@ Public Class Form1
         End Select
     End Sub
 
-    ''' <summary>
-    ''' Password: Enter triggers login attempt.
-    ''' </summary>
+   
     Private Sub txtPassword_KeyPress(sender As Object,
         e As KeyPressEventArgs) Handles txtPassword.KeyPress
 
@@ -59,10 +45,7 @@ Public Class Form1
         End If
     End Sub
 
-    ''' <summary>
-    ''' Block Ctrl+V paste on username to avoid injecting
-    ''' special characters.
-    ''' </summary>
+   
     Private Sub txtUsername_KeyDown(sender As Object,
         e As KeyEventArgs) Handles txtUsername.KeyDown
 
@@ -71,19 +54,15 @@ Public Class Form1
         End If
     End Sub
 
-    '══════════════════════════════════════════════════════════
-    ' LOGIN BUTTON
-    '══════════════════════════════════════════════════════════
+    
     Private Sub btnLogin_Click(sender As Object,
         e As EventArgs) Handles btnLogIn.Click
         DoLogin()
     End Sub
 
-    '══════════════════════════════════════════════════════════
-    ' CORE LOGIN LOGIC
-    '══════════════════════════════════════════════════════════
+     
     Private Sub DoLogin()
-        ' Ignore while locked
+         
         If _lockCountdown > 0 Then
             MessageBox.Show(
                 "System is locked. Please wait " &
@@ -97,7 +76,7 @@ Public Class Form1
         Dim username As String = txtUsername.Text.Trim()
         Dim password As String = txtPassword.Text.Trim()
 
-        ' Empty field guard
+         
         If username = "" OrElse password = "" Then
             MessageBox.Show(
                 "Please enter both username and password.",
@@ -107,15 +86,15 @@ Public Class Form1
             Return
         End If
 
-        ' Check against Accounts table
+        
         If IsValidAccount(username, password) Then
-            '── Success ──────────────────────────────
+             
             _attempts = 0
             Me.Hide()
             Dim main As New MainForm()
             main.Show()
         Else
-            '── Failed attempt ────────────────────────
+             
             _attempts += 1
             txtPassword.Clear()
             txtPassword.Focus()
@@ -138,9 +117,7 @@ Public Class Form1
         End If
     End Sub
 
-    '══════════════════════════════════════════════════════════
-    ' DATABASE CHECK — Accounts table
-    '══════════════════════════════════════════════════════════
+    
     Private Function IsValidAccount(username As String,
                                     password As String) As Boolean
         Try
@@ -167,18 +144,16 @@ Public Class Form1
         End Try
     End Function
 
-    '══════════════════════════════════════════════════════════
-    ' LOCKDOWN — triggers after 3 failed attempts
-    '══════════════════════════════════════════════════════════
+    
     Private Sub LockSystem()
         _lockCountdown = LOCK_SECONDS
 
-        ' Disable all inputs
+         
         txtUsername.Enabled = False
         txtPassword.Enabled = False
         btnLogIn.Enabled = False
 
-        ' Show lock UI
+         
         lblAttempts.Text = "ACCOUNT LOCKED"
         lblAttempts.ForeColor = Color.Red
         lblLockMsg.Text =
@@ -197,9 +172,7 @@ Public Class Form1
             MessageBoxIcon.Stop)
     End Sub
 
-    '══════════════════════════════════════════════════════════
-    ' COUNTDOWN TIMER  (Interval = 1000ms)
-    '══════════════════════════════════════════════════════════
+    
     Private Sub Timer1_Tick(sender As Object,
         e As EventArgs) Handles Timer1.Tick
 
@@ -222,9 +195,7 @@ Public Class Form1
         End If
     End Sub
 
-    '══════════════════════════════════════════════════════════
-    ' RESET UI — used on load and after lockdown ends
-    '══════════════════════════════════════════════════════════
+    
     Private Sub ResetUI()
         txtUsername.Enabled = True
         txtPassword.Enabled = True
