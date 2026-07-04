@@ -9,19 +9,14 @@
         End Set
     End Property
 
-    '────────────────────────────────────────────────────────────
-    ' FORM LOAD — populate program combo box
-    '────────────────────────────────────────────────────────────
+   
     Private Sub AEPatrons_Load(sender As Object,
         e As EventArgs) Handles MyBase.Load
         Connect.PopulateComboBox(
             "SELECT ID, ProgCode FROM Programs", cboProgram)
     End Sub
 
-    '────────────────────────────────────────────────────────────
-    ' KEY TRAPPING
-    '────────────────────────────────────────────────────────────
-    ' Name fields — letters and spaces only
+    
     Private Sub NameField_KeyPress(sender As Object,
         e As KeyPressEventArgs) _
         Handles txtLastName.KeyPress,
@@ -37,7 +32,7 @@
         End If
     End Sub
 
-    ' Year level — digits only
+    
     Private Sub txtYearLevel_KeyPress(sender As Object,
         e As KeyPressEventArgs) Handles txtYearLevel.KeyPress
         Dim allowed As String = "1234567890"
@@ -47,9 +42,7 @@
         If Asc(e.KeyChar) = 8 Then e.Handled = False
     End Sub
 
-    '────────────────────────────────────────────────────────────
-    ' SAVE BUTTON
-    '────────────────────────────────────────────────────────────
+    
     Private Sub btnSave_Click(sender As Object, e As EventArgs)
 
         If Trim(txtLastName.Text) = "" Or
@@ -63,7 +56,7 @@
             Exit Sub
         End If
 
-        ' Get ProgramID from selected program code
+        
         Dim progID As Integer =
             Connect.SQLPull(
                 "SELECT ID FROM Programs WHERE " &
@@ -97,9 +90,7 @@
         Me.Dispose()
     End Sub
 
-    '────────────────────────────────────────────────────────────
-    ' CANCEL BUTTON
-    '────────────────────────────────────────────────────────────
+    
 
 
     Private Sub btnCancel_Click_1(sender As Object, e As EventArgs) Handles btnCancel.Click
