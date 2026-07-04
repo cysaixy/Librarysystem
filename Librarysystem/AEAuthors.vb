@@ -9,9 +9,7 @@
         End Set
     End Property
 
-    '────────────────────────────────────────────────────────────
-    ' KEY TRAPPING — letters and spaces only
-    '────────────────────────────────────────────────────────────
+    
     Private Sub txtAuthorName_KeyPress(sender As Object,
         e As KeyPressEventArgs) Handles txtAuthorName.KeyPress
         Dim allowed As String =
